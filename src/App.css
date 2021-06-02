@@ -1,5 +1,33 @@
 .App {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 55px;
+  z-index: 999;
+  background-color: green;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-nav > a {
+  margin-right: 20px;
+  text-decoration: none;
+  color: whitesmoke;
 }
 
 .App-logo {
