@@ -4,7 +4,7 @@ import { asyncRemoveTodo } from "./todosAPI";
 
 const initialState = [
   {
-    id: "the same with unique time-stamp",
+    id: 123456789, //should always being a number
     title: "buy something in supermarket...",
     content: "an egg, 2 oranges, 1.5l milk, 2 packs of pancake, ...",
     label: "0f0",
@@ -44,6 +44,12 @@ const todosSlice = createSlice({
         return item;
       });
     },
+    selectedAll: (state, action) => {
+      return state.map((item) => ({
+        ...item,
+        isSelected: action.payload.checked,
+      }));
+    },
   },
   extraReducers: {
     [asyncRemoveTodo.fulfilled]: (state, action) => {
@@ -54,5 +60,5 @@ const todosSlice = createSlice({
 
 const { actions, reducer } = todosSlice;
 
-export const { add, update, remove } = actions;
+export const { add, update, updateMany, selectedAll } = actions;
 export default reducer;

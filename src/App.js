@@ -15,7 +15,7 @@ function App() {
         <Link to="/todos">Todos</Link>
       </nav>
       <Switch>
-        <Route exact="/" path="/">
+        <Route exact path="/">
           <Home />
         </Route>
         <Route path="/counter">
