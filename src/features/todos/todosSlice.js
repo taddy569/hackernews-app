@@ -1,6 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-import { asyncRemoveTodo } from "./todosAPI";
+import { asyncRemoveTodoAPI } from "./todosAPI";
 
 const initialState = [
   {
@@ -12,10 +12,18 @@ const initialState = [
     isImportant: true,
     isComplete: false,
     isRemove: false,
-    isAsyncDelete: false, // undo like gmail
+    isAsyncRemove: false, // undo like gmail
     isSelected: false,
   },
 ];
+
+export const removeTodoAsync = createAsyncThunk(
+  "hackerNews/removeAsync",
+  async (value) => {
+    const res = await asyncRemoveTodoAPI(value);
+    return res.data;
+  }
+);
 
 const todosSlice = createSlice({
   name: "hackerNews",
@@ -52,9 +60,16 @@ const todosSlice = createSlice({
     },
   },
   extraReducers: {
-    [asyncRemoveTodo.fulfilled]: (state, action) => {
-      return state.filter((item) => item.id !== action.payload.id);
+    [removeTodoAsync.pending]: (state, action) => {},
+    [removeTodoAsync.fulfilled]: (state, action) => {
+      state = state.map((item) => {
+        if (item.isSelected === true) {
+          item.isAsyncRemove = true;
+        }
+        return item;
+      });
     },
+    [removeTodoAsync.rejected]: (state, action) => {},
   },
 });
 
