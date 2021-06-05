@@ -1,6 +1,5 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 
 import {
   add,
@@ -10,6 +9,7 @@ import {
   removeTodoAsync,
 } from "./todosSlice";
 // import { asyncRemoveTodo } from "./todosAPI";
+import TodoItem from "./TodoItem";
 
 const generateDefaultAddedTodo = () => {
   const uniqueValue = new Date().getTime();
@@ -66,16 +66,26 @@ const Todos = () => {
     dispatch(removeTodoAsync());
   };
 
+  const handleSetImportant = (payload) => {
+    dispatch(update(payload));
+  };
+
   return (
     <div className="App">
       <h1>Todos</h1>
       <div>
-        <button onClick={handleAddTodo}>+</button>
-        <button onClick={handleRemoveManyTodos}>x</button>
-        <button onClick={handleAsyncRemoveTodos}>Async Remove</button>
+        <button className="custom-button" onClick={handleAddTodo}>
+          Add
+        </button>
+        <button className="custom-button" onClick={handleRemoveManyTodos}>
+          Remove
+        </button>
+        <button className="custom-button" onClick={handleAsyncRemoveTodos}>
+          Async Remove
+        </button>
       </div>
       <div>
-        {todos.filter((item) => item.isRemove === false).length > 0 ? (
+        {/* {todos.filter((item) => item.isRemove === false).length > 0 ? (
           <div
             style={{
               width: "100%",
@@ -102,50 +112,20 @@ const Todos = () => {
           </div>
         ) : (
           ""
-        )}
+        )} */}
         {todos
           .filter((item) => item.isAsyncRemove === false)
-          .map((item, index) => {
-            return (
-              <div
-                key={item.id}
-                style={{
-                  width: "100%",
-                  height: "55px",
-                  border: "1px solid black",
-                  marginBottom: "15px",
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                <span style={{ marginRight: "10px" }}>
-                  <input
-                    type="checkbox"
-                    id={item.id}
-                    value={item.id}
-                    checked={item.isSelected}
-                    onChange={handleChangeSelected}
-                  />
-                </span>
-                <Link
-                  to=":id"
-                  style={{
-                    textDecoration: "none",
-                    color: "black",
-                  }}
-                >
-                  <span
-                    style={{ marginRight: "10px" }}
-                  >{`Selected: ${item.isSelected}`}</span>
-                  <span
-                    style={{ marginRight: "10px" }}
-                  >{`Important: ${item.isImportant}`}</span>
-                  <span
-                    style={{ marginRight: "10px" }}
-                  >{`Remove: ${item.isRemove}`}</span>
-                  <span style={{ marginRight: "10px" }}>{item.title}</span>
-                </Link>
-                {/* step by step
+          .map((item) => {
+            return <TodoItem item={item} onSetImportant={handleSetImportant} />;
+          })}
+      </div>
+    </div>
+  );
+};
+
+export default Todos;
+
+/* step by step
       [OK]  fake add action => click add icon => new item will be appeared 
       
       [OK] selected checkbox
@@ -165,13 +145,4 @@ const Todos = () => {
 
         check border-bottom of todo item
         display todo(s) in grid of flex mode, card, ...
-   */}
-              </div>
-            );
-          })}
-      </div>
-    </div>
-  );
-};
-
-export default Todos;
+   */

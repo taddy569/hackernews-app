@@ -1,10 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
+import "App.css";
 import { Counter } from "features/counter/Counter";
 import Todos from "features/todos/Todos";
 import Home from "features/home/Home";
-import "App.css";
+import TodoDetail from "features/todos/TodoDetail";
 
 function App() {
   return (
@@ -21,8 +22,11 @@ function App() {
         <Route path="/counter">
           <Counter />
         </Route>
-        <Route path="/todos">
+        <Route exact path="/todos">
           <Todos />
+        </Route>
+        <Route path="/todos/:id">
+          <TodoDetail />
         </Route>
       </Switch>
     </Router>

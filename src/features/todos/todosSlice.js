@@ -4,11 +4,11 @@ import { asyncRemoveTodoAPI } from "./todosAPI";
 
 const initialState = [
   {
-    id: 123456789, //should always being a number
+    id: 1622877066121, //should always being a number
     title: "buy something in supermarket...",
     content: "an egg, 2 oranges, 1.5l milk, 2 packs of pancake, ...",
     label: "0f0",
-    createdAt: "unix time stamp...",
+    createdAt: 1622877066121,
     isImportant: true,
     isComplete: false,
     isRemove: false,
@@ -32,7 +32,7 @@ const todosSlice = createSlice({
     add: (state, action) => [...state, action.payload],
     update: (state, action) => {
       return state.map((item) => {
-        if (item.id === action.payload.id) {
+        if (item.id === Number(action.payload.id)) {
           item = {
             ...item,
             ...action.payload,
