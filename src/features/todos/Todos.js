@@ -147,8 +147,15 @@ export default Todos;
         display todo(s) in grid of flex mode, card, ...
 
         scss and BEM, each component should have their own styling file
+        general structure css file for project, css variable
+          https://stackoverflow.com/questions/15831657/creating-css-global-variables-stylesheet-theme-management
+          https://github.com/minhthao56/core-webpack/blob/master/src/assets/scss/variable.scss
         doing - done - all
         redux persist for localStorage
 
-        dark mode vs light mode
+        dark mode vs light mode // useContext or redux and save to localStorage
+        multi language ?
+
+        use debug web chrome
+        use component and pro-fi-lier
    */
