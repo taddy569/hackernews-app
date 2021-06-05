@@ -145,4 +145,10 @@ export default Todos;
 
         check border-bottom of todo item
         display todo(s) in grid of flex mode, card, ...
+
+        scss and BEM, each component should have their own styling file
+        doing - done - all
+        redux persist for localStorage
+
+        dark mode vs light mode
    */
